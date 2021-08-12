@@ -20,24 +20,29 @@ class AccountController extends Controller
         return view('cashbook.searchform',compact('accounts'));
     }
     public function searchresult(Request $request){
+    //    $request->session()->put('my_name','Virat Gandhi');
        $account="";
        if($request->account){
-        $accounts=Account::with("header")->where("account",'like','%'.$request->account."%")->get();
+            $request->session()->put('my_name',$request->account);
+            $accounts=Account::with("header")->where("account",'like','%'.$request->account."%")->get();
        }
        elseif ($request->date) {
-         $accounts=Account::with("header")->where("date",'like','%'.$request->date."%")->get();
+            $request->session()->put('my_name',$request->date);
+            $accounts=Account::with("header")->where("date",'like','%'.$request->date."%")->get();
        }
        elseif ($request->detail) {
-        $f_detail=Detail::where("name",'like','%'.$request->detail."%")->first();
-        $accounts=Account::with("header")->where("header_id",'=',$f_detail->id)->get();
+            $f_detail=Detail::where("name",'like','%'.$request->detail."%")->first();
+            $request->session()->put('my_name',$f_detail->id);
+            $accounts=Account::with("header")->where("header_id",'=',$f_detail->id)->get();
        }
        elseif ($request->remarks) {
-        $accounts=Account::with("header")->where("remarks",'like','%'.$request->remarks."%")->get();
+            $request->session()->put('my_name',$request->remarks);
+            $accounts=Account::with("header")->where("remarks",'like','%'.$request->remarks."%")->get();
        }
        elseif ($request->header) {
-        $f_header=Header::where("name",'like','%'.$request->header."%")->first();
-        
-        $accounts=Account::with("header")->where("header_id",'=',$f_header->id)->get();
+            $f_header=Header::where("name",'like','%'.$request->header."%")->first();
+            $request->session()->put('my_name',$f_header->id);
+            $accounts=Account::with("header")->where("header_id",'=',$f_header->id)->get();
         
        }
     //    elseif (condition) {
@@ -84,4 +89,15 @@ class AccountController extends Controller
             return redirect()->route('addcash');
         }
     } 
+
+    public function afterdelete(Request $request){
+        dd($request->session()->get('my_name'));
+        $accounts=[];
+        return view('cashbook.searchform',compact('accounts'));
+    }
+
+    public function deleteRecord(Request $request,$id){
+       $account=Account::find($id)->delete();
+       return redirect()->route('saremeotech');  
+    }
 }

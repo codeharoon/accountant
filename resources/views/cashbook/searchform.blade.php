@@ -40,6 +40,7 @@
                   <th>Detail</th>
                   <th>Remarks</th>
                   <th>Attachment</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -55,6 +56,7 @@
                    <td>{{$item->detail->name}}</td>
                    <td>{{$item->remarks}}</td>
                    <td><img width="70px" height="70px" src="{{ asset('storage/'.$item->Attachment) }}" alt=""></td>
+                   <td><a href="{{route('deleterecord',$item->id)}}" class="btn btn-danger">Delete</a></td>
                  </tr> 
                 @endforeach
               </tbody>
