@@ -100,6 +100,10 @@
                 @endforeach
               </select>
             </div>
+            <div class="form-group">
+              <label for="purpose">Purpose</label>
+              <input type="text" class="form-control" id="purpose" name="purpose" placeholder="Enter Purpose">
+          </div>
 
                 <button type="submit" class="btn btn-primary">Save</button>
           </form>
@@ -188,6 +192,7 @@
         <form action="{{route('storecash')}}" method="POST" enctype="multipart/form-data">
             @csrf
           <div class="card-body">
+            <input type="hidden" name="organization" value="Saremeo">
             <div class="form-group">
                 <label for="account">Date</label>
                 <input type="date" class="form-control" id="date" name="date">

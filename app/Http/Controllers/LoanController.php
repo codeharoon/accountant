@@ -17,6 +17,7 @@ class LoanController extends Controller
             $latest=$request->loan;
             $loan->loan=$latest;
             $loan->provider=$request->provider;
+            $loan->purpose=$request->purpose;
             $save=$loan->save();
             if($save){
                return redirect()->route('addcash');
@@ -27,6 +28,7 @@ class LoanController extends Controller
             $addL->loan=$request->loan;
             $addL->provider=$request->provider;
             $addL->name=$request->name;
+            $addL->purpose=$request->purpose;
             $save=$addL->save();
             if($save){
                return redirect()->route('addcash');

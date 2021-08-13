@@ -32,7 +32,7 @@ class AccountController extends Controller
        elseif ($request->detail) {
             $f_detail=Detail::where("name",'like','%'.$request->detail."%")->first();
             $request->session()->put('my_name',$f_detail->id);
-            $accounts=Account::with("header")->where("header_id",'=',$f_detail->id)->get();
+            $accounts=Account::with("header")->where("detail_id",'=',$f_detail->id)->get();
        }
        elseif ($request->remarks) {
             $request->session()->put('my_name',$request->remarks);
@@ -41,10 +41,23 @@ class AccountController extends Controller
        elseif ($request->header) {
             $f_header=Header::where("name",'like','%'.$request->header."%")->first();
             $request->session()->put('my_name',$f_header->id);
-            $accounts=Account::with("header")->where("header_id",'=',$f_header->id)->get();
-        
+            $accounts=Account::with("header")->where("header_id",'=',$f_header->id)->get();        
        }
-   
+      elseif($request->golbal){
+        $request->session()->put('my_name',$request->golbal);
+        $accounts=Account::with("header")->where("account",'like','%'.$request->golbal."%")
+                                         ->orwhere("remarks",'like','%'.$request->golbal."%")     
+                                       ->orwhere("date",'like','%'.$request->golbal."%")->get(); 
+        // $f_header=Header::where("name",'like','%'.$request->header."%")->first();
+        // $header_search=Account::with("header")->where("header_id",'=',$f_header->id)->get();    
+        
+        // $f_detail=Detail::where("name",'like','%'.$request->detail."%")->first();
+        // $detail_search=Account::with("header")->where("detail_id",'=',$f_detail->id)->get();
+        // $accounts=(object) array_merge((array) $glo_search, array_merge((array) $header_search,(array) $detail_search));
+        // dd(gettype($accounts));
+        // $accounts=array_merge($glo_search,array_merge($header_search,$detail_search));
+        // $accounts=Account::where("account",'like','%'.$request->golbal."%")->orwhere('id','=',4)->orwhere('id','=',5)->get(); 
+      }
        return view('cashbook.searchform',compact('accounts'));
 
     }
@@ -70,6 +83,7 @@ class AccountController extends Controller
         
         $account=new Account();
         $account->date=$request->date;
+        $account->organization=$request->organization;
         $account->account=$request->account;
         $account->header_id=$request->header;
         $account->detail_id=$request->datail;

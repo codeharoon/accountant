@@ -21,7 +21,8 @@
                         <div class="col-md-2"><input type="text" class="form-control" name="header" id="header" placeholder="Header"></div>
                         <div class="col-md-2"><input type="text" class="form-control" name="detail" id="detail" placeholder="Detail"></div>
                         <div class="col-md-2"><input type="text" class="form-control" name="remarks" id="remarks" placeholder="Remarks"></div>
-                        <div class="col-md-2"><button type="submit" class="btn btn-primary">Search</button></div>
+                        <div class="col-md-1"><input type="text" class="form-control" name="golbal" id="golbal" placeholder="Global"></div>
+                        <div class="col-md-1"><button type="submit" class="btn btn-primary">Search</button></div>
                     </div>      
             </form>
             <div id="show_search_result">

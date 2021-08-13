@@ -23,7 +23,7 @@ Route::get('/', function () {
 
 // search cash data url
 
-Route::get('saremeotech',[AccountController::class,'index'])->name('saremeotech');
+Route::get('organization',[AccountController::class,'index'])->name('saremeotech');
 Route::post('searchresult',[AccountController::class,'searchresult'])->name('searchresult');
 Route::get('deleterecord/{id?}',[AccountController::class,'deleteRecord'])->name('deleterecord');
 Route::get('afterdelete/{id?}',[AccountController::class,'afterdelete'])->name('afterdelete');
