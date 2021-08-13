@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cash;
-use App\Models\Loan;
+use App\Models\loan;
 
 class CashController extends Controller
 {
@@ -14,7 +14,7 @@ class CashController extends Controller
         }
     public function addCash(Request $request){
         $cash=Cash::where('name','like','%'.$request->name.'%')->first();
-        $loan=Loan::where('name','like','%'.$request->name.'%')->first();
+        $loan=loan::where('name','like','%'.$request->name.'%')->first();
         $newcash=$request->cash+$cash->cash_here;
         $latest=$newcash-$loan->loan;
         $cash->cash_here=$latest;

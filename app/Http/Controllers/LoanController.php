@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Loan;
+use App\Models\loan;
 
 class LoanController extends Controller
 {
@@ -12,7 +12,7 @@ class LoanController extends Controller
          $this->middleware('auth');
       }
    public function add_loan(Request $request){
-         $loan=Loan::where('name','like','%'.$request->name.'%')->first();
+         $loan=loan::where('name','like','%'.$request->name.'%')->first();
          if($loan !== null){
             $latest=$request->loan;
             $loan->loan=$latest;
@@ -24,7 +24,7 @@ class LoanController extends Controller
             }
          }
          else{
-            $addL=new Loan();
+            $addL=new loan();
             $addL->loan=$request->loan;
             $addL->provider=$request->provider;
             $addL->name=$request->name;
