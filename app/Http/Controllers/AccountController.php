@@ -9,10 +9,9 @@ use App\Models\Header;
 use App\Models\Detail;
 class AccountController extends Controller
 {
-    public function __construct()
-        {
-            $this->middleware('auth');
-        }
+    public function __construct() {
+        $this->middleware('auth');
+    }
     public function index(){
         // $accounts=Account::where('id','=',1)->orwhere('id','=',2)->orwhere('id','=',3)->get();
         // dd($accounts);
@@ -45,9 +44,6 @@ class AccountController extends Controller
             $accounts=Account::with("header")->where("header_id",'=',$f_header->id)->get();
         
        }
-    //    elseif (condition) {
-    //        # code...
-    //    }
    
        return view('cashbook.searchform',compact('accounts'));
 

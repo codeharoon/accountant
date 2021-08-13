@@ -14,7 +14,7 @@ class AddOrganizationToAccountsTable extends Migration
     public function up()
     {
         Schema::table('accounts', function (Blueprint $table) {
-            //
+           $table->string('organization',100)->after('account');
         });
     }
 
@@ -26,7 +26,7 @@ class AddOrganizationToAccountsTable extends Migration
     public function down()
     {
         Schema::table('accounts', function (Blueprint $table) {
-            //
+            $table->dropColumn('organization');
         });
     }
 }

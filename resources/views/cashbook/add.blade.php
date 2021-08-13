@@ -85,7 +85,7 @@
              @csrf
              <div class="form-group">
               <label for="provider">Name</label>
-              <input type="text" class="form-control" id="provider" name="provider" placeholder="Enter Cash">
+              <input type="text" class="form-control" id="provider" name="provider" placeholder="Enter Name">
             </div>
              <div class="form-group">
                 <label for="loan">Loan</label>
